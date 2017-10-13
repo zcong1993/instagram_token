@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        html, body, .container {
+            height: 100%;
+        }
+
+        .container {
+            margin-right: auto;
+            margin-left: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /*background-color: #eee;*/
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding-right: 15px;
+                padding-left: 15px;
+                width: 750px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                width: 970px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                width: 1170px;
+            }
+        }
+    </style>
+    <title>{{ .name }}</title>
+</head>
+<body>
+    <div class="container">
+        <h1>instagram access token</h1>
+        <p>{{ .token }}</p>
+    </div>
+</body>
+</html>
