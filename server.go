@@ -1,13 +1,13 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"net/http"
-	"fmt"
 	"bytes"
-	"net/url"
-	"io/ioutil"
+	"fmt"
 	"github.com/buger/jsonparser"
+	"github.com/gin-gonic/gin"
+	"io/ioutil"
+	"net/http"
+	"net/url"
 )
 
 //type User struct {
@@ -25,7 +25,7 @@ import (
 //	User User `decoder:"user"`
 //}
 
-func Post(apiUrl string, form map[string]string, headers map[string]string)([]byte, error) {
+func Post(apiUrl string, form map[string]string, headers map[string]string) ([]byte, error) {
 	client := &http.Client{}
 	formData := url.Values{}
 	for k, v := range form {
@@ -69,11 +69,11 @@ func Run(ClientID, ClientSecret string) {
 		code := c.Query("code")
 		//params := &Params{ClientID, ClientSecret, "authorization_code", RedirectUrl, code}
 		formData := map[string]string{
-			"client_id": ClientID,
+			"client_id":     ClientID,
 			"client_secret": ClientSecret,
-			"grant_type": "authorization_code",
-			"redirect_uri": RedirectUrl,
-			"code": code,
+			"grant_type":    "authorization_code",
+			"redirect_uri":  RedirectUrl,
+			"code":          code,
 		}
 		var msg string
 		token, err := Post(TokenUrl, formData, map[string]string{"Content-Type": "application/x-www-form-urlencoded"})
@@ -81,10 +81,9 @@ func Run(ClientID, ClientSecret string) {
 			msg = "Oops! An error occurred!"
 		}
 		msg = string(token)
-		fmt.Println(msg)
 		c.HTML(http.StatusOK, "show.tmpl", gin.H{
 			"token": msg,
-			"name": AppName,
+			"name":  AppName,
 		})
 	})
 	router.Run(":7080")
